@@ -57,4 +57,13 @@ jobs:
         run: |
           python -m compileall .
 
-      
+      # Create deployment package
+      - name: Package Frontend
+        run: |
+          cd frontend
+          zip -r ../frontend.zip .
+
+      # Upload artifact to S3
+      - name: Upload to S3
+        run: |
+          aws s3 cp frontend.zip s3://javaprojectartifacts30june/artifacts/frontend.zip
