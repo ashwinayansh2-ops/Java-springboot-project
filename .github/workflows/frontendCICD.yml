@@ -1,0 +1,29 @@
+name: "Test CICD for Frontend Deployment"
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+    contents: read
+    id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # checking out the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # seting up java packages
+      - name: Set up java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # cleaning the build directory
+      - name: Clean Build Directory
+        run: mvn clean
