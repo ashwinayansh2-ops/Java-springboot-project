@@ -71,3 +71,4 @@ jobs:
 
       - name: Verify Upload
         run: aws s3 ls s3://javaprojectartifacts30june/backend
+        
