@@ -50,28 +50,3 @@ jobs:
       - name: Print Error Message
         if: failure()
         run: echo "AWS Login Failed"
-
-      # building the backend project
-      - name: Build Backend Project
-        working-directory: ./frontend
-        run: mvn package -DskipTests
-
-      # listing all files in target folder
-      - name: List target directory
-        working-directory: ./frontend
-        run: ls -lh target/
-
-    # check if the build was successful or not
-      - name: Check Build Status
-        if: success()
-        run: echo "Build Successful"
-      - name: Check Build Status
-        if: failure()
-        run: echo "Build Failed"
-
-    # move the build output to S3 bucket using OIDC
-      - name: Upload JAR to S3
-        run:  aws s3 cp backend/target/datastore-0.0.7.jar s3://javaprojectartifacts30june/frontend/datastore-0.0.7.jar
-
-      - name: Verify Upload
-        run: aws s3 ls s3://javaprojectartifacts30june/backend  
