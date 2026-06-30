@@ -70,5 +70,4 @@ jobs:
         run:  aws s3 cp backend/target/datastore-0.0.7.jar s3://javaprojectartifacts30june/backend/datastore-0.0.7.jar
 
       - name: Verify Upload
-        run: aws s3 ls s3://javaprojectartifacts30june/backend/
-        
+        run: aws s3 ls s3://javaprojectartifacts30june/backend
