@@ -23,7 +23,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-
-      # cleaning the build directory
-      - name: Clean Build Directory
+      
+      - name: build
+        working-directory: ./backendf
         run: mvn clean
+      # cleaning the build directory
+      
