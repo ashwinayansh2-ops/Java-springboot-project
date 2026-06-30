@@ -40,5 +40,9 @@ jobs:
       - name: Validate AWS Login
         run: aws sts get-caller-identity
 
-
-      
+      # if varification is successful, then print the message else print the error message
+      - name: Print Success Message
+        run: echo "AWS Login Successful"
+      - name: Print Error Message
+        if: failure()
+        run: echo "AWS Login Failed"
