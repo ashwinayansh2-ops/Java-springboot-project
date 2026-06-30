@@ -1,9 +1,8 @@
-name: Frontend CICD pipeline
+name: "Test CICD for Backend Deployment"
 on:
-  workflow_run:
-    workflows: ["Test CICD for Backend Deployment"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 permissions:
     contents: read
@@ -12,8 +11,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      #checking out repository
+      # checking out the repository
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -24,11 +24,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Clean build
-        working-directory: ./frontend
-        run: mvc clean
-
-      #adding aws configuration credentials using OIDC
+      # cleaning the build directory
+      - name: clean build directory
+        working-directory: ./backend
+        run: mvn clean
+     
+     #adding aws configuration credentials using OIDC
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -48,12 +49,12 @@ jobs:
 
       # building the backend project
       - name: Build Backend Project
-        working-directory: ./frontend
+        working-directory: ./backend
         run: mvn package -DskipTests
 
       # listing all files in target folder
       - name: List target directory
-        working-directory: ./frontend
+        working-directory: ./backend
         run: ls -lh target/
 
     # check if the build was successful or not
@@ -66,7 +67,7 @@ jobs:
 
     # move the build output to S3 bucket using OIDC
       - name: Upload JAR to S3
-        run:  aws s3 cp backend/target/datastore-0.0.7.jar s3://javaprojectartifacts30june/frontend/datastore-0.0.7.jar
+        run:  aws s3 cp backend/target/datastore-0.0.7.jar s3://javaprojectartifacts30june/backend/datastore-0.0.7.jar
 
       - name: Verify Upload
-        run: aws s3 ls s3://javaprojectartifacts30june/backend  
+        run: aws s3 ls s3://javaprojectartifacts30june/backend
