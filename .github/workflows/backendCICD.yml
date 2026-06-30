@@ -65,7 +65,7 @@ jobs:
         if: failure()
         run: echo "Build Failed"
 
-    # move the build output to S3 bucket using OIDC
+    # move the build output to S3 bucket using OIDC.
       - name: Upload JAR to S3
         run:  aws s3 cp backend/target/datastore-0.0.7.jar s3://myproject2026db/backend/datastore-0.0.7.jar
 
