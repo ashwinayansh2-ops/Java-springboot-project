@@ -38,7 +38,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: "arn:aws:iam::767397972310:role/Java_Build"
+          role-to-assume: "arn:aws:iam::767398151554:role/myOIDC"
           aws-region: us-east-1
 
       # valifying login to AWS
@@ -66,4 +66,4 @@ jobs:
       # Upload artifact to S3
       - name: Upload to S3
         run: |
-          aws s3 cp frontend.zip s3://javaprojectartifacts30june/artifacts/frontend.zip
+          aws s3 cp frontend.zip s3://myproject2026db/artifacts/frontend.zip

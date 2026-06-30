@@ -33,7 +33,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: "arn:aws:iam::767397972310:role/Java_Build"
+          role-to-assume: "arn:aws:iam::767398151554:role/myOIDC"
           aws-region: us-east-1
 
       # valifying login to AWS
@@ -67,8 +67,8 @@ jobs:
 
     # move the build output to S3 bucket using OIDC
       - name: Upload JAR to S3
-        run:  aws s3 cp backend/target/datastore-0.0.7.jar s3://javaprojectartifacts30june/backend/datastore-0.0.7.jar
+        run:  aws s3 cp backend/target/datastore-0.0.7.jar s3://myproject2026db/backend/datastore-0.0.7.jar
 
       - name: Verify Upload
-        run: aws s3 ls s3://javaprojectartifacts30june/backend
+        run: aws s3 ls s3://myproject2026db/backend
         
