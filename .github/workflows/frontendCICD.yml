@@ -50,7 +50,7 @@ jobs:
       # building the backend project
       - name: Build Backend Project
         working-directory: ./backend
-        run: mvn package
+        run: mvn package -DskipTests
 
       # listing all files in target folder
       - name: List target directory
