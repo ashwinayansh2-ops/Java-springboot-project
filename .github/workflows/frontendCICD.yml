@@ -22,16 +22,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # seting up java packages
-      - name: Set up java
-        uses: actions/setup-java@v3
+      #setting up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          distribution: 'temurin'
-          java-version: '17'
+         python-version: '3.12'
 
-      - name: Clean build
-        working-directory: ./frontend
-        run: mvn clean
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
 
       #adding aws configuration credentials using OIDC
       - name: Configure AWS credentials
