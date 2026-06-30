@@ -51,3 +51,10 @@ jobs:
       - name: Print Error Message
         if: failure()
         run: echo "AWS Login Failed"
+
+      # Compile all Python files to check for syntax errors
+      - name: Build Python Code
+        run: |
+          python -m compileall .
+
+      
