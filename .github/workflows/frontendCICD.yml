@@ -67,4 +67,3 @@ jobs:
       - name: Upload to S3
         run: |
           aws s3 cp frontend.zip s3://myproject2026db/artifacts/frontend.zip
-          
