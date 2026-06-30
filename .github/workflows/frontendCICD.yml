@@ -1,9 +1,14 @@
 name: Frontend CICD pipeline
 on:
-  workflow_run:
-    workflows: ["Test CICD for Backend Deployment"]
-    types:
-      - completed
+  #workflow_run:
+  #  workflows: ["Test CICD for Backend Deployment"]
+  #  types:
+  #    - completed
+
+  push:
+    branches:
+      - main
+
 
 permissions:
     contents: read
@@ -26,7 +31,7 @@ jobs:
 
       - name: Clean build
         working-directory: ./frontend
-        run: mvc clean
+        run: mvn clean
 
       #adding aws configuration credentials using OIDC
       - name: Configure AWS credentials
